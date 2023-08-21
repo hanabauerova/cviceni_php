@@ -3,6 +3,7 @@
     include ("pripojeni.php");
     include ("funkce.php");
 
+   
     if($_SERVER['REQUEST_METHOD'] =="POST")
     {
            //čtení databáze
@@ -24,7 +25,6 @@
                         {
                             $_SESSION['id_user']=$user_data['id_user'];
                             header("Location: pro_prihlasene.php");
-                            die;
                         }
                     }
                 }
@@ -35,7 +35,7 @@
             {
                 echo "Musí být vyplněna obě pole! " . mysqli_error($con);
             }
-          //  mysqli_close($con); 
+          mysqli_close($con); 
     }
 ?>
 
@@ -48,8 +48,10 @@
     <title>Pro registrované</title>
 </head>
 <body>
-<?php  menu(); ?>
-<div class="container">
+<?php  menu();
+
+if (!isset($_SESSION["id_user"])) {
+    echo '<div class="container">
     <form action="" method="post">
         <h1>Přihlášení</h1><br>
 
@@ -61,6 +63,11 @@
 
         <input type="submit" class="button" value="Přihlásit se"><br><br>
     </form>
-    </div>
+    </div>';
+}else{
+    echo "Uživatel je už přihlášen.";
+}
+?>
+
 </body>
 </html>
