@@ -1,0 +1,15 @@
+ CREATE DATABASE login_test DEFAULT CHARACTER SET utf8 COLLATE utf8_czech_ci;
+
+use login_test
+
+CREATE TABLE users(
+ id_user INTEGER NOT NULL auto_increment PRIMARY KEY,
+ user_name VARCHAR(150) NOT NULL,
+ user_surname VARCHAR(150) NOT NULL,
+ user_login VARCHAR(50) NOT NULL UNIQUE,
+ user_password VARCHAR(20) NOT NULL
+);
+
+CREATE USER login@localhost IDENTIFIED BY 'heslologin';
+GRANT SELECT, INSERT, UPDATE, DELETE ON login_test.* TO login
+@localhost;
