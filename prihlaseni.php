@@ -65,7 +65,7 @@ if (!isset($_SESSION["id_user"])) {
     </form>
     </div>';
 }else{
-    echo "Uživatel je už přihlášen.";
+    header("Location: pro_prihlasene.php");
 }
 ?>
 
